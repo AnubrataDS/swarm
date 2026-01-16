@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxisj3pm4rwcg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g5ejs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5ejs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g5ejs"]
+
+[sub_resource type="Sky" id="Sky_rpg24"]
+sky_material = SubResource("ProceduralSkyMaterial_g5ejs")
+
+[sub_resource type="Environment" id="Environment_3vi8l"]
+background_mode = 2
+sky = SubResource("Sky_rpg24")
+sky_custom_fov = 7.7
+ambient_light_source = 3
+tonemap_mode = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g5ejs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpg24"]
+albedo_color = Color(0.13725491, 1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rpg24"]
+radius = 0.392
+height = 1.046
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vi8l"]
+albedo_color = Color(0.99215686, 0.4392157, 0.5803922, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_g5ejs")
+surface_material_override/0 = SubResource("StandardMaterial3D_g5ejs")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, -0.25898206, 1.5367045, 1.9121838)
+projection = 1
+current = true
+size = 2.0
+near = 0.001
+far = 99999.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3vi8l")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3691838, 0.89799726, 0)
+light_energy = 1.495
+shadow_enabled = true
+shadow_bias = 0.021
+shadow_normal_bias = 1.602
+shadow_transmittance_bias = 2.06
+shadow_opacity = 0.31
+omni_range = 1.927
+
+[node name="Player" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.05882878, 0)
+mesh = SubResource("CapsuleMesh_g5ejs")
+surface_material_override/0 = SubResource("StandardMaterial3D_rpg24")
+
+[node name="Enemy" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.023568131, 0.27928868)
+mesh = SubResource("CapsuleMesh_rpg24")
+surface_material_override/0 = SubResource("StandardMaterial3D_3vi8l")

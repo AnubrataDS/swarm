@@ -11,5 +11,6 @@ config_version=5
 [application]
 
 config/name="swarm"
+run/main_scene="uid://cxisj3pm4rwcg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
