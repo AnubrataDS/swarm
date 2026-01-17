@@ -2,7 +2,7 @@ extends Node3D
 const enemy_scene: PackedScene =  preload('res://enemy.tscn')
 @onready
 var player_ref = $Player
-const count = 300;
+const count = 500;
 func _ready():
 	for i in range(count):
 		var en = enemy_scene.instantiate()

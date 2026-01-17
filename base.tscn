@@ -44,7 +44,7 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6.084
 projection = 1
 current = true
 fov = 104.1
-size = 3.0
+size = 5.0
 far = 999999.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
