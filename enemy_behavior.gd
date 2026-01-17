@@ -9,7 +9,8 @@ var push_strength = Vector3(0.9,0.9,0.9)
 var vel_lim = 20
 var proc_lim = 20
 func _ready():
-	pass
+	player_ref = get_parent().player_ref
+
 
 func _physics_process(delta: float) -> void:
 	cone.look_at(player_ref.get_position())
