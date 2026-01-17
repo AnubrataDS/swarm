@@ -11,5 +11,14 @@ config_version=5
 [application]
 
 config/name="swarm"
+run/main_scene="uid://cxisj3pm4rwcg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[rendering]
+
+2d/shadow_atlas/size=8192
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+anti_aliasing/quality/use_debanding=true
+lights_and_shadows/positional_shadow/atlas_size=8196

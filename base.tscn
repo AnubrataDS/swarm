@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxisj3pm4rwcg"]
+
+[ext_resource type="Script" uid="uid://dhcj8cdeafcj3" path="res://spawner.gd" id="1_rpg24"]
+[ext_resource type="Script" uid="uid://dv22la5wopenx" path="res://player.gd" id="2_3vi8l"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g5ejs"]
+size = Vector2(1000, 1000)
+subdivide_width = 1000
+subdivide_depth = 1000
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5ejs"]
+albedo_color = Color(0.57700837, 0.5770084, 0.57700837, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g5ejs"]
+
+[sub_resource type="Sky" id="Sky_rpg24"]
+sky_material = SubResource("ProceduralSkyMaterial_g5ejs")
+
+[sub_resource type="Environment" id="Environment_3vi8l"]
+background_mode = 2
+sky = SubResource("Sky_rpg24")
+sky_custom_fov = 7.7
+ambient_light_source = 3
+tonemap_mode = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g5ejs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpg24"]
+albedo_color = Color(0.13725491, 1, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rpg24"]
+height = 2.1
+radius = 0.7
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_rpg24")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_g5ejs")
+surface_material_override/0 = SubResource("StandardMaterial3D_g5ejs")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6.0843296, 10.286768)
+projection = 1
+current = true
+fov = 104.1
+size = 5.0
+far = 999999.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3vi8l")
+
+[node name="Player" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.05882878, 0)
+mesh = SubResource("CapsuleMesh_g5ejs")
+surface_material_override/0 = SubResource("StandardMaterial3D_rpg24")
+script = ExtResource("2_3vi8l")
+
+[node name="Area3D" type="Area3D" parent="Player"]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Area3D"]
+shape = SubResource("CylinderShape3D_rpg24")
+debug_color = Color(0.6431373, 0.4, 0.8627451, 1)
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8466672, 0.53212285, 0, -0.53212285, 0.8466672, 0, 0.5896543, 1.5837538)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024289846, 1.5337641, -2.2604003)
+light_energy = 3.415
+light_size = 0.094
+shadow_enabled = true
+shadow_bias = 0.037
+shadow_blur = 0.56
+distance_fade_enabled = true
+omni_range = 166.403
+omni_attenuation = 1.881

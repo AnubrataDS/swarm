@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://gfpwhjm46mw1"]
+
+[ext_resource type="Script" uid="uid://cewpcdpdtgdti" path="res://enemy_behavior.gd" id="1_7k104"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7k104"]
+top_radius = 0.0
+radial_segments = 8
+cap_top = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
+albedo_color = Color(1, 0.30588236, 0.3019608, 1)
+disable_receive_shadows = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7k104"]
+radius = 1.0
+
+[node name="Enemy" type="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_7k104")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Cone" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_7k104")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4gyqm")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
+shape = SubResource("SphereShape3D_7k104")
