@@ -1,6 +1,10 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://cquol8oabjffi"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cquol8oabjffi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mcth1"]
+load_path = "res://.godot/imported/1b.png-16a7cfe66d850619ed1640370344776b.s3tc.ctex"
 
 [resource]
-albedo_color = Color(0.39969057, 0.59678894, 0.43484706, 1)
+albedo_texture = SubResource("CompressedTexture2D_mcth1")
 metallic = 1.0
 metallic_specular = 0.0
+uv1_scale = Vector3(2048, 2048, 2048)

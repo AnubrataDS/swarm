@@ -11,7 +11,6 @@ var proc_lim = 20
 func _ready():
 	player_ref = get_parent().player_ref
 
-
 func _physics_process(delta: float) -> void:
 	cone.look_at(player_ref.get_position())
 	velocity = (player_ref.get_position() - get_position())*seek_strength
@@ -23,4 +22,3 @@ func _physics_process(delta: float) -> void:
 	if(velocity.length() > vel_lim):
 		velocity = velocity.normalized()*vel_lim
 	translate(velocity*delta)
-		
