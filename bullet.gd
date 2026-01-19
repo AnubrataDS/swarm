@@ -1,12 +1,12 @@
 extends Node3D
 
 @export var look:Vector3
-var origin
-var dir
-var speed = 5
+@export var origin: Vector3
+@export var dir: Vector3
+var speed = 1
 func _ready():
 	origin = get_position()
-	dir = (look-origin).normalized()
+	dir = look
 
 func _physics_process(delta: float) -> void:
 	translate(delta*dir*speed)

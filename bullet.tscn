@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://dqw0xu3jbwu0q" path="res://bullet.gd" id="1_v7oki"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtl8c"]
-albedo_color = Color(18.892157, 18.892157, 2.9455643, 1)
+albedo_color = Color(3.2944162, 3.2944162, 3.2944162, 1)
+billboard_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
 material = SubResource("StandardMaterial3D_rtl8c")
-radius = 0.02
+radius = 0.01
 height = 0.02
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7oki"]

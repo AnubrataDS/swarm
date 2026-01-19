@@ -48,7 +48,6 @@ far = 999999.0
 script = ExtResource("2_8rhti")
 
 [node name="Player" parent="." instance=ExtResource("3_8rhti")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.05882878, 0)
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8466672, 0.53212285, 0, -0.53212285, 0.8466672, 0, 0.5896543, 1.5837538)
