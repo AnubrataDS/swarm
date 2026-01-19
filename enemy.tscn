@@ -7,7 +7,8 @@ top_radius = 0.0
 radial_segments = 8
 cap_top = false
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7k104"]
+resource_local_to_scene = true
 albedo_color = Color(1, 0.30588236, 0.3019608, 1)
 disable_receive_shadows = true
 
@@ -40,13 +41,21 @@ script = ExtResource("1_7k104")
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0.25, 0)
 mesh = SubResource("CylinderMesh_7k104")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_4gyqm")
+surface_material_override/0 = SubResource("StandardMaterial3D_7k104")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
+shape = SubResource("SphereShape3D_7k104")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
 shape = SubResource("SphereShape3D_7k104")
 
@@ -72,3 +81,5 @@ theme_override_styles/background = SubResource("StyleBoxFlat_7k104")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4gyqm")
 value = 20.0
 show_percentage = false
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

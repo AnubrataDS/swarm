@@ -3,9 +3,12 @@ extends Node3D
 @export var player_ref: Node3D
 @onready var area = $Area3D
 @onready var cone = $Body
+@onready var coneShape = $Body/Cone
 @onready var hpbar = $HPBar/Container/ProgressBar
-var velocity: Vector3 = Vector3(0,0,0)
-var seek_strength = Vector3(randf_range(5,10), 0 , randf_range(5,10))
+@onready var hitbox = $Hitbox
+@onready var old_color = coneShape.get_surface_override_material(0).albedo_color
+var velocity = Vector3(0,0,0)
+var seek_strength = Vector3(randf_range(5,15), 0 , randf_range(5,15))
 var push_strength = Vector3(0.9,0.9,0.9)
 var vel_lim = 30
 var proc_lim = 20
@@ -19,7 +22,9 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	_look()
 	_move(delta)
+	_blip()
 	_updateHpBar()
+	_checkDeath()
 	
 
 func _look() -> void:
@@ -46,3 +51,18 @@ func _updateHpBar() -> void:
 func _update_target_offset() -> void:
 	hover_radius = randf_range(0.5,1.5)
 	theta += randf_range(0,PI/10)
+
+func _blip()->void:
+	if(hitbox.get_overlapping_areas().size()>0):
+		coneShape.get_surface_override_material(0).albedo_color = Color(0,3,0)
+	else:
+		coneShape.get_surface_override_material(0).albedo_color = old_color
+
+func _checkDeath()->void:
+	if(hp<=0):
+		coneShape.get_surface_override_material(0).albedo_color = Color(3,3,0)
+		queue_free()
+	
+func _on_hitbox_area_entered(area: Area3D) -> void:
+	hp-=5
+	pass # Replace with function body.
