@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gfpwhjm46mw1"]
+[gd_scene load_steps=13 format=3 uid="uid://gfpwhjm46mw1"]
 
 [ext_resource type="Script" uid="uid://cewpcdpdtgdti" path="res://enemy_behavior.gd" id="1_7k104"]
 
@@ -19,17 +19,55 @@ radius = 1.0
 viewport_path = NodePath("HPBar/Container")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7k104"]
-bg_color = Color(0.101960786, 0.011764706, 0.019607844, 0.32156864)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-border_blend = true
+bg_color = Color(0.09985284, 0.012920001, 0.025840001, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.735)
 corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gyqm"]
-bg_color = Color(0.6964413, 0.17330366, 0.118678756, 1)
+bg_color = Color(4.415934, 0, 0, 0.818)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8001019, 0.8001019, 0.8001019, 0)
+
+[sub_resource type="Curve" id="Curve_7k104"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.049194977, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4gyqm"]
+curve = SubResource("Curve_7k104")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qi2p4"]
+angle_min = 1.0728835e-05
+angle_max = 375.90002
+velocity_pivot = Vector3(1, 1, 1)
+direction = Vector3(1, 1, 1)
+spread = 109.196
+initial_velocity_max = 6.49
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 39.049984
+gravity = Vector3(0, -1, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_4gyqm")
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_epg4t"]
+material = SubResource("StandardMaterial3D_4gyqm")
+size = Vector2(0.05, 0.05)
 
 [node name="Enemy" type="Node3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -68,7 +106,7 @@ texture = SubResource("ViewportTexture_7k104")
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(120, 10)
+size = Vector2i(120, 20)
 
 [node name="ProgressBar" type="ProgressBar" parent="HPBar/Container"]
 anchors_preset = 15
@@ -81,5 +119,15 @@ theme_override_styles/background = SubResource("StyleBoxFlat_7k104")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4gyqm")
 value = 20.0
 show_percentage = false
+
+[node name="HitParticle" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2321634, 0.13911214)
+emitting = false
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.81
+randomness = 0.09
+process_material = SubResource("ParticleProcessMaterial_qi2p4")
+draw_pass_1 = SubResource("QuadMesh_epg4t")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

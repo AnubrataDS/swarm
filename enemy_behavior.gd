@@ -7,6 +7,7 @@ extends Node3D
 @onready var hpbar = $HPBar/Container/ProgressBar
 @onready var hitbox = $Hitbox
 @onready var old_color = coneShape.get_surface_override_material(0).albedo_color
+@onready var hitparticle = $HitParticle
 var velocity = Vector3(0,0,0)
 var seek_strength = Vector3(randf_range(5,15), 0 , randf_range(5,15))
 var push_strength = Vector3(0.9,0.9,0.9)
@@ -65,4 +66,5 @@ func _checkDeath()->void:
 	
 func _on_hitbox_area_entered(area: Area3D) -> void:
 	hp-=5
+	hitparticle.emitting = true
 	pass # Replace with function body.
