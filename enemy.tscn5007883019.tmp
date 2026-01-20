@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://gfpwhjm46mw1"]
+
+[ext_resource type="Script" uid="uid://cewpcdpdtgdti" path="res://enemy_behavior.gd" id="1_7k104"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7k104"]
+top_radius = 0.0
+radial_segments = 8
+cap_top = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
+albedo_color = Color(1, 0.30588236, 0.3019608, 1)
+disable_receive_shadows = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7k104"]
+radius = 2.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7k104"]
+viewport_path = NodePath("HPBar/Container")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7k104"]
+bg_color = Color(0.101960786, 0.011764706, 0.019607844, 0.32156864)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gyqm"]
+bg_color = Color(0.6964413, 0.17330366, 0.118678756, 1)
+
+[node name="Enemy" type="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_7k104")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Cone" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_7k104")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4gyqm")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
+shape = SubResource("SphereShape3D_7k104")
+
+[node name="HPBar" type="Sprite3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.7696735, 0.011274666)
+billboard = 1
+texture = SubResource("ViewportTexture_7k104")
+
+[node name="Container" type="SubViewport" parent="HPBar"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(120, 10)
+
+[node name="ProgressBar" type="ProgressBar" parent="HPBar/Container"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_7k104")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4gyqm")
+value = 20.0
+show_percentage = false
