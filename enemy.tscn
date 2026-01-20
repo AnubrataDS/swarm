@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gfpwhjm46mw1"]
+[gd_scene load_steps=22 format=3 uid="uid://gfpwhjm46mw1"]
 
 [ext_resource type="Script" uid="uid://cewpcdpdtgdti" path="res://enemy_behavior.gd" id="1_7k104"]
 
@@ -35,6 +35,12 @@ disable_receive_shadows = true
 [sub_resource type="SphereShape3D" id="SphereShape3D_7k104"]
 radius = 1.0
 
+[sub_resource type="Gradient" id="Gradient_4gyqm"]
+colors = PackedColorArray(4.415934, 4.112944, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qi2p4"]
+gradient = SubResource("Gradient_4gyqm")
+
 [sub_resource type="Curve" id="Curve_7k104"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.049194977, 0, 0]
 point_count = 2
@@ -53,8 +59,10 @@ angular_velocity_min = -1.6093254e-05
 angular_velocity_max = 39.049984
 gravity = Vector3(0, -1, 0)
 scale_min = 0.0
+scale_max = 0.5
 scale_curve = SubResource("CurveTexture_4gyqm")
-color = Color(1, 1, 0.29748532, 1)
+color = Color(1, 1, 0.6636825, 1)
+color_ramp = SubResource("GradientTexture1D_qi2p4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
 shading_mode = 0
@@ -165,7 +173,7 @@ draw_pass_1 = SubResource("QuadMesh_epg4t")
 
 [node name="DeathParticles" type="GPUParticles3D" parent="."]
 emitting = false
-lifetime = 0.47000000000000003
+lifetime = 0.47
 one_shot = true
 explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_epg4t")
