@@ -30,8 +30,9 @@ func _move(delta:float)->void:
 func _attack():
 	if Input.is_action_pressed("auto_attack"):
 		var bullet = bullet_scene.instantiate()
-		bullet.look = lookingAt-position
-		add_child(bullet)
+		bullet.position = position
+		bullet.look = lookingAt
+		get_parent().add_child(bullet)
 		pass
 
 func _mouseAimReader():

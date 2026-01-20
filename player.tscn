@@ -43,10 +43,11 @@ debug_color = Color(0.6431373, 0.4, 0.8627451, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21732104, 0)
+billboard = 1
 texture = SubResource("ViewportTexture_4flbx")
 
 [node name="SubViewport" type="SubViewport" parent="Sprite3D"]
-size = Vector2i(40, 10)
+size = Vector2i(20, 5)
 
 [node name="ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport"]
 z_index = 1
