@@ -9,6 +9,8 @@ var attack_time = 0.05
 var elapsed_since_last_shot = 0
 var recoil_strength = 0.02
 var dodge_multiplier = 3
+var stamina = 100
+@onready var staminabar = $Sprite3D/SubViewport/ProgressBar
 func _ready():
 	camera = get_parent().get_node("OrthoCam")
 	viewPortSize = get_viewport().size
@@ -20,7 +22,14 @@ func _physics_process(delta: float) -> void:
 	
 func _move(delta:float)->void:
 	var movt = Vector3(0,0,0)
-	var mult = dodge_multiplier if Input.is_action_pressed("dodge") else 1
+	var mult = 1
+	if Input.is_action_pressed("dodge"):
+		if(stamina>0):
+			mult = dodge_multiplier
+			stamina -= 1
+	else:
+		if(stamina<100):
+			stamina += 1
 	if Input.is_action_pressed("right"):
 		movt += Vector3(1,0,0)
 	if Input.is_action_pressed("left"):
@@ -30,6 +39,7 @@ func _move(delta:float)->void:
 	if Input.is_action_pressed("down"):
 		movt += Vector3(0,0,1)
 	translate(movt.normalized()*delta*speed*mult)
+	staminabar.value = stamina
 
 func _attack(delta):
 	if Input.is_action_pressed("auto_attack"):

@@ -19,7 +19,7 @@ radial_segments = 4
 rings = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7oki"]
-radius = 0.002
+radius = 0.02
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_v7oki")

@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxisj3pm4rwcg"]
+
+[ext_resource type="Script" uid="uid://dhcj8cdeafcj3" path="res://spawner.gd" id="1_rpg24"]
+[ext_resource type="Script" uid="uid://crfpp1tja4v8k" path="res://cameraController.gd" id="2_8rhti"]
+[ext_resource type="PackedScene" uid="uid://bqalcd7lwn7sj" path="res://player.tscn" id="3_8rhti"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rhti"]
+albedo_color = Color(0.851769, 0.8517689, 0.85176885, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g5ejs"]
+material = SubResource("StandardMaterial3D_8rhti")
+size = Vector2(1000, 1000)
+subdivide_width = 1000
+subdivide_depth = 1000
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g5ejs"]
+
+[sub_resource type="Sky" id="Sky_rpg24"]
+sky_material = SubResource("ProceduralSkyMaterial_g5ejs")
+
+[sub_resource type="Environment" id="Environment_3vi8l"]
+background_mode = 2
+sky = SubResource("Sky_rpg24")
+sky_custom_fov = 7.7
+ambient_light_source = 3
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+glow_hdr_threshold = 0.88
+glow_hdr_scale = 2.47
+
+[sub_resource type="BoxMesh" id="BoxMesh_8rhti"]
+size = Vector3(0.9, 0.9, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8rhti"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_rpg24")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+mesh = SubResource("PlaneMesh_g5ejs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3vi8l")
+
+[node name="OrthoCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6.0843296, 10.286768)
+projection = 1
+current = true
+fov = 104.1
+size = 5.0
+near = 0.002
+far = 999999.0
+script = ExtResource("2_8rhti")
+
+[node name="Player" parent="." instance=ExtResource("3_8rhti")]
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8466672, 0.53212285, 0, -0.53212285, 0.8466672, 0, 0.5896543, 1.5837538)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024289846, 1.5337641, -2.2604003)
+light_energy = 3.415
+light_size = 0.094
+shadow_enabled = true
+shadow_bias = 0.037
+shadow_blur = 0.56
+distance_fade_enabled = true
+omni_range = 166.403
+omni_attenuation = 1.881
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38192344, 3.4355135)
+mesh = SubResource("BoxMesh_8rhti")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("BoxShape3D_8rhti")
