@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqalcd7lwn7sj"]
+[gd_scene load_steps=10 format=3 uid="uid://bqalcd7lwn7sj"]
 
 [ext_resource type="Script" uid="uid://dv22la5wopenx" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://dq7khw0xmrorl" path="res://debug_line.gd" id="2_onrkg"]
@@ -10,8 +10,8 @@ albedo_color = Color(0.40028462, 0.9732825, 0.9468047, 1)
 material = SubResource("StandardMaterial3D_4flbx")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rpg24"]
-height = 2.1
-radius = 2.0
+height = 0.3
+radius = 0.1
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4flbx"]
 viewport_path = NodePath("Sprite3D/SubViewport")
@@ -26,6 +26,8 @@ border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3pqv"]
 bg_color = Color(0.23529412, 0.5019608, 0.31764707, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_onrkg"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_4flbx")
@@ -63,4 +65,6 @@ value = 50.0
 show_percentage = false
 
 [node name="DebugLine" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_onrkg")
 script = ExtResource("2_onrkg")

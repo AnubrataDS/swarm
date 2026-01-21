@@ -3,13 +3,20 @@
 [ext_resource type="Script" uid="uid://dqw0xu3jbwu0q" path="res://bullet.gd" id="1_v7oki"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtl8c"]
-albedo_color = Color(3.2944162, 3.2944162, 3.2944162, 1)
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+albedo_color = Color(2.454227, 2.454227, 2.454227, 1)
 billboard_mode = 1
+distance_fade_mode = 1
+distance_fade_max_distance = 3.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
 material = SubResource("StandardMaterial3D_rtl8c")
-radius = 0.01
-height = 0.02
+radius = 0.02
+height = 0.04
+radial_segments = 4
+rings = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7oki"]
 radius = 0.002

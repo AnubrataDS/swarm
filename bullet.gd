@@ -3,7 +3,7 @@ extends Node3D
 @export var look:Vector3
 @export var origin: Vector3
 @export var dir: Vector3
-var speed = 10
+var speed = 7
 func _ready():
 	origin = get_position()
 	dir = (look-origin).normalized()

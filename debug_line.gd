@@ -2,13 +2,10 @@ extends MeshInstance3D
 
 var m_color : Color = Color.GREEN
 
-var m_material : ORMMaterial3D = ORMMaterial3D.new()
+var m_material : ORMMaterial3D = preload("res://aim_line_mat.tres")
 
 func _ready():
 	mesh = ImmediateMesh.new()
-	m_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	m_material.albedo_color = Color(1,0,0.2)
-	m_material.vertex_color_use_as_albedo = true
 	
 func _process(delta):
 	draw()
