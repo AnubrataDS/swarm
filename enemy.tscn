@@ -83,6 +83,7 @@ colors = PackedColorArray(3.2944162, 3.2944162, 3.2944162, 1, 1.0919174, 0.12315
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4gyqm"]
 gradient = SubResource("Gradient_7k104")
+use_hdr = true
 
 [sub_resource type="Curve" id="Curve_qi2p4"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.39688715, 0.25409842), 0.48326883, 0.0, 0, 0]

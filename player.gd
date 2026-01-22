@@ -11,6 +11,7 @@ var recoil_strength = 0.02
 var dodge_multiplier = 3
 var stamina = 100
 @onready var staminabar = $Body/Sprite3D/SubViewport/ProgressBar
+@onready var muzzleFlash = $MuzzleFlash
 func _ready():
 	camera = get_parent().get_node("OrthoCam")
 	viewPortSize = get_viewport().size
@@ -73,7 +74,10 @@ func get_mouse_position_on_plane(screen_position: Vector2) -> Vector3:
 		return Vector3.INF # Or some other indicator of no intersection
 
 func _shoot():
+	muzzleFlash.emitting = true
+	muzzleFlash.look_at(lookingAt)
 	var bullet = bullet_scene.instantiate()
 	bullet.position = position
-	bullet.look = lookingAt + recoil_strength*(Vector3(randf_range(-1,1),0,randf_range(-1,1)))*(lookingAt-position).length()
+	var recoil = recoil_strength*(Vector3(randf_range(-1,1),0,randf_range(-1,1)))*(lookingAt-position).length()
+	bullet.look = lookingAt + recoil
 	get_parent().add_child(bullet)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqalcd7lwn7sj"]
+[gd_scene load_steps=16 format=3 uid="uid://bqalcd7lwn7sj"]
 
 [ext_resource type="Script" uid="uid://dv22la5wopenx" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="2_i3pqv"]
@@ -35,6 +35,36 @@ height = 0.3
 radius = 0.1
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_onrkg"]
+
+[sub_resource type="Curve" id="Curve_i3pqv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99707603, 0.8052164), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hqtel"]
+curve = SubResource("Curve_i3pqv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i3pqv"]
+direction = Vector3(0, 0, -1)
+spread = 30.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, -1, 0)
+scale_min = 0.0
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_hqtel")
+color = Color(3.2944162, 3.2944162, 1.3149769, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqtel"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_sweqy"]
+material = SubResource("StandardMaterial3D_hqtel")
+size = Vector2(0.1, 0.1)
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_4flbx")
@@ -75,3 +105,12 @@ debug_color = Color(0.6431373, 0.4, 0.8627451, 1)
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_onrkg")
 script = ExtResource("2_onrkg")
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.09999999999999999
+one_shot = true
+explosiveness = 0.55
+process_material = SubResource("ParticleProcessMaterial_i3pqv")
+draw_pass_1 = SubResource("QuadMesh_sweqy")
