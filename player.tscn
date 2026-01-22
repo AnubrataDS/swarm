@@ -1,31 +1,38 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqalcd7lwn7sj"]
+[gd_scene load_steps=11 format=3 uid="uid://bqalcd7lwn7sj"]
 
 [ext_resource type="Script" uid="uid://dv22la5wopenx" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://dq7khw0xmrorl" path="res://debug_line.gd" id="2_onrkg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
-albedo_color = Color(1.3901314, 3.20772, 3.120681, 1)
+albedo_color = Color(0.5766774, 0.86397636, 0.85915905, 1)
+albedo_texture = ExtResource("2_i3pqv")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 material = SubResource("StandardMaterial3D_4flbx")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_rpg24"]
-height = 0.3
-radius = 0.1
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_4flbx"]
-viewport_path = NodePath("Sprite3D/SubViewport")
+viewport_path = NodePath("Body/Sprite3D/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onrkg"]
 bg_color = Color(0.01152887, 0.10602791, 0.05829762, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3pqv"]
-bg_color = Color(0.23529412, 0.5019608, 0.31764707, 1)
+bg_color = Color(0, 1.2973584, 1.1045501, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rpg24"]
+height = 0.3
+radius = 0.1
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_onrkg"]
 
@@ -36,22 +43,15 @@ script = ExtResource("1_4flbx")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_onrkg")
 
-[node name="Area3D" type="Area3D" parent="."]
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("CylinderShape3D_rpg24")
-debug_color = Color(0.6431373, 0.4, 0.8627451, 1)
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21732104, 0)
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 2.1732104, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_4flbx")
 
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+[node name="SubViewport" type="SubViewport" parent="Body/Sprite3D"]
 size = Vector2i(20, 5)
 
-[node name="ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport"]
+[node name="ProgressBar" type="ProgressBar" parent="Body/Sprite3D/SubViewport"]
 z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +63,13 @@ theme_override_styles/background = SubResource("StyleBoxFlat_onrkg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i3pqv")
 value = 50.0
 show_percentage = false
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_rpg24")
+debug_color = Color(0.6431373, 0.4, 0.8627451, 1)
 
 [node name="DebugLine" type="MeshInstance3D" parent="."]
 cast_shadow = 0

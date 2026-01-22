@@ -10,7 +10,7 @@ var elapsed_since_last_shot = 0
 var recoil_strength = 0.02
 var dodge_multiplier = 3
 var stamina = 100
-@onready var staminabar = $Sprite3D/SubViewport/ProgressBar
+@onready var staminabar = $Body/Sprite3D/SubViewport/ProgressBar
 func _ready():
 	camera = get_parent().get_node("OrthoCam")
 	viewPortSize = get_viewport().size

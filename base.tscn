@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxisj3pm4rwcg"]
+[gd_scene load_steps=10 format=3 uid="uid://cxisj3pm4rwcg"]
 
 [ext_resource type="Script" uid="uid://dhcj8cdeafcj3" path="res://spawner.gd" id="1_rpg24"]
 [ext_resource type="Script" uid="uid://crfpp1tja4v8k" path="res://cameraController.gd" id="2_8rhti"]
+[ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="2_ohhpf"]
 [ext_resource type="PackedScene" uid="uid://bqalcd7lwn7sj" path="res://player.tscn" id="3_8rhti"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rhti"]
-albedo_color = Color(0.851769, 0.8517689, 0.85176885, 1)
+albedo_texture = ExtResource("2_ohhpf")
+uv1_scale = Vector3(512, 512, 512)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g5ejs"]
 material = SubResource("StandardMaterial3D_8rhti")
