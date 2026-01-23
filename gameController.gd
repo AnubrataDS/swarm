@@ -1,10 +1,11 @@
 extends Node3D
 const enemy_scene: PackedScene =  preload('res://enemy.tscn')
-@onready var player_ref = $Player
+@onready var player_node = $Player
 @onready var cam = $OrthoCam
-const count = 300;
+@onready var sniper = $Sniper
+const count = 5;
 func _ready():
-	cam.player_ref = player_ref
+	GlobalVars.player_node = player_node
 	for i in range(count):
 		var en = enemy_scene.instantiate()
 		en.translate(Vector3(randf_range(-30,30), 0 , randf_range(-30,30)))

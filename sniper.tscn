@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bitlf7y54vgq1"]
+
+[ext_resource type="Script" uid="uid://cp4vfa3cpsgsh" path="res://sniper.gd" id="1_6jcko"]
+[ext_resource type="Script" uid="uid://bg3s34g78dvj4" path="res://aim.gd" id="1_xcl07"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ti2x"]
+albedo_color = Color(1, 0.3491902, 0.47657922, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4ti2x"]
+material = SubResource("StandardMaterial3D_4ti2x")
+radius = 0.05
+height = 0.2
+
+[node name="Sniper" type="Node3D"]
+script = ExtResource("1_6jcko")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_4ti2x")
+
+[node name="Aim" type="MeshInstance3D" parent="."]
+script = ExtResource("1_xcl07")

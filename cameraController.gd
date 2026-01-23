@@ -5,7 +5,7 @@ var relativePos = Vector3(0,6,10)
 @onready var initZoom = size
 var zoomfactor = 20
 func _physics_process(delta: float) -> void:
-	var target = player_ref.get_position() + relativePos
+	var target = GlobalVars.player_node.get_position() + relativePos
 	var disp = (target - get_position())*0.5
 	position += disp
 	var targetZoom = initZoom + disp.length()*zoomfactor
