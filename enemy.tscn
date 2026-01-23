@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gfpwhjm46mw1"]
+[gd_scene load_steps=22 format=3 uid="uid://gfpwhjm46mw1"]
 
 [ext_resource type="Script" uid="uid://cewpcdpdtgdti" path="res://enemy_behavior.gd" id="1_7k104"]
 
@@ -33,10 +33,16 @@ albedo_color = Color(1, 0.30588236, 0.3019608, 1)
 disable_receive_shadows = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7k104"]
-radius = 1.0
+radius = 1.2
+
+[sub_resource type="Gradient" id="Gradient_4gyqm"]
+colors = PackedColorArray(4.415934, 4.112944, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qi2p4"]
+gradient = SubResource("Gradient_4gyqm")
 
 [sub_resource type="Curve" id="Curve_7k104"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.049194977, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.78988326, 0), 0.0, 0.049194977, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_4gyqm"]
@@ -48,13 +54,15 @@ angle_max = 1.0728835e-05
 velocity_pivot = Vector3(1, 1, 1)
 direction = Vector3(1, 1, 1)
 spread = 109.196
-initial_velocity_max = 6.49
+initial_velocity_max = 8.0
 angular_velocity_min = -1.6093254e-05
 angular_velocity_max = 39.049984
 gravity = Vector3(0, -1, 0)
-scale_min = 0.0
+scale_min = 0.5
+scale_max = 0.7
 scale_curve = SubResource("CurveTexture_4gyqm")
-color = Color(1, 1, 0.29748532, 1)
+color = Color(1, 1, 0.6636825, 1)
+color_ramp = SubResource("GradientTexture1D_qi2p4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
 shading_mode = 0
@@ -70,11 +78,12 @@ material = SubResource("StandardMaterial3D_4gyqm")
 size = Vector2(0.05, 0.05)
 
 [sub_resource type="Gradient" id="Gradient_7k104"]
-offsets = PackedFloat32Array(0, 0.14718615, 0.5670996, 0.8095238)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.106126174, 0, 1, 1, 0.75158876, 0, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.103896104, 0.53246754, 0.77922076, 1)
+colors = PackedColorArray(3.2944162, 3.2944162, 3.2944162, 1, 1.0919174, 0.12315822, 0, 1, 1, 0.75158876, 0, 1, 0.427493, 0.42749307, 0.42749307, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4gyqm"]
 gradient = SubResource("Gradient_7k104")
+use_hdr = true
 
 [sub_resource type="Curve" id="Curve_qi2p4"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.39688715, 0.25409842), 0.48326883, 0.0, 0, 0]
@@ -88,7 +97,8 @@ direction = Vector3(1, 1, 1)
 spread = 118.007
 initial_velocity_max = 15.87
 gravity = Vector3(0, -1, 0)
-scale_max = 6.0
+scale_min = 4.0
+scale_max = 8.0
 scale_curve = SubResource("CurveTexture_iifgy")
 color_ramp = SubResource("GradientTexture1D_4gyqm")
 
@@ -107,6 +117,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("1_7k104")
 
 [node name="Body" type="Node3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="HPBar" type="Sprite3D" parent="Body"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.7696735, 0.011274666)
@@ -139,33 +150,37 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7k104")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 19
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.33243185, 0.07122904)
 shape = SubResource("SphereShape3D_7k104")
+debug_color = Color(0.91567373, 0.12973905, 0.6372578, 0.41960785)
 
 [node name="Hitbox" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.38022575, 0.11836693)
 shape = SubResource("SphereShape3D_7k104")
+debug_color = Color(0.91567373, 0.12973905, 0.6372578, 0.41960785)
 
 [node name="HitParticle" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2321634, 0.13911214)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45898008, -0.525864)
+sorting_offset = 2.0
 emitting = false
+amount = 20
 lifetime = 0.6
 one_shot = true
-explosiveness = 0.81
-randomness = 0.09
+explosiveness = 0.92
+randomness = 0.93
 process_material = SubResource("ParticleProcessMaterial_qi2p4")
 draw_pass_1 = SubResource("QuadMesh_epg4t")
 
 [node name="DeathParticles" type="GPUParticles3D" parent="."]
 emitting = false
-lifetime = 0.47000000000000003
+lifetime = 0.47
 one_shot = true
 explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_epg4t")

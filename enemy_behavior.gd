@@ -11,7 +11,7 @@ extends Node3D
 @onready var deathparticles = $DeathParticles
 var velocity = Vector3(0,0,0)
 var seek_strength = Vector3(randf_range(10,15), 0 , randf_range(10,15))
-var push_strength = Vector3(0.9,0.9,0.9)
+var push_strength = Vector3(0.9,0,0.9)
 var vel_lim = 30
 var proc_lim = 20
 var hp = 100
@@ -42,7 +42,7 @@ func _move(delta:float) -> void:
 	var bodies = area.get_overlapping_areas()
 	var netPush = Vector3(0,0,0)
 	for i in range(min(bodies.size(), proc_lim)):
-		if(get_position().distance_squared_to(bodies[i].get_position())> 0.001):
+		if(get_position().distance_squared_to(bodies[i].get_position())> 0.01):
 			netPush += (get_position()-bodies[i].get_position())/get_position().distance_squared_to(bodies[i].get_position())
 	velocity += netPush
 	if(velocity.length() > vel_lim):
@@ -58,7 +58,7 @@ func _update_target_offset() -> void:
 
 func _blip()->void:
 	if(hitbox.get_overlapping_areas().size()>0):
-		coneShape.get_surface_override_material(0).albedo_color = Color(2,2,2)
+		coneShape.get_surface_override_material(0).albedo_color = Color(9,3,3)
 	else:
 		coneShape.get_surface_override_material(0).albedo_color = old_color
 

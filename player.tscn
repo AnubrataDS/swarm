@@ -1,31 +1,70 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqalcd7lwn7sj"]
+[gd_scene load_steps=16 format=3 uid="uid://bqalcd7lwn7sj"]
 
 [ext_resource type="Script" uid="uid://dv22la5wopenx" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://dq7khw0xmrorl" path="res://debug_line.gd" id="2_onrkg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
-albedo_color = Color(0.40028462, 0.9732825, 0.9468047, 1)
+albedo_color = Color(0.5766774, 0.86397636, 0.85915905, 1)
+albedo_texture = ExtResource("2_i3pqv")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 material = SubResource("StandardMaterial3D_4flbx")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_rpg24"]
-height = 2.1
-radius = 2.0
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_4flbx"]
-viewport_path = NodePath("Sprite3D/SubViewport")
+viewport_path = NodePath("Body/Sprite3D/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onrkg"]
 bg_color = Color(0.01152887, 0.10602791, 0.05829762, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3pqv"]
-bg_color = Color(0.23529412, 0.5019608, 0.31764707, 1)
+bg_color = Color(0, 1.2973584, 1.1045501, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rpg24"]
+height = 0.3
+radius = 0.1
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_onrkg"]
+
+[sub_resource type="Curve" id="Curve_i3pqv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99707603, 0.8052164), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hqtel"]
+curve = SubResource("Curve_i3pqv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i3pqv"]
+direction = Vector3(0, 0, -1)
+spread = 30.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, -1, 0)
+scale_min = 0.0
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_hqtel")
+color = Color(3.2944162, 3.2944162, 1.3149769, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqtel"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_sweqy"]
+material = SubResource("StandardMaterial3D_hqtel")
+size = Vector2(0.1, 0.1)
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_4flbx")
@@ -34,22 +73,15 @@ script = ExtResource("1_4flbx")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_onrkg")
 
-[node name="Area3D" type="Area3D" parent="."]
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("CylinderShape3D_rpg24")
-debug_color = Color(0.6431373, 0.4, 0.8627451, 1)
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21732104, 0)
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 2.1732104, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_4flbx")
 
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+[node name="SubViewport" type="SubViewport" parent="Body/Sprite3D"]
 size = Vector2i(20, 5)
 
-[node name="ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport"]
+[node name="ProgressBar" type="ProgressBar" parent="Body/Sprite3D/SubViewport"]
 z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,5 +94,23 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_i3pqv")
 value = 50.0
 show_percentage = false
 
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_rpg24")
+debug_color = Color(0.6431373, 0.4, 0.8627451, 1)
+
 [node name="DebugLine" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_onrkg")
 script = ExtResource("2_onrkg")
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.09999999999999999
+one_shot = true
+explosiveness = 0.55
+process_material = SubResource("ParticleProcessMaterial_i3pqv")
+draw_pass_1 = SubResource("QuadMesh_sweqy")

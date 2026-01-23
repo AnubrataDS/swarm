@@ -1,23 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwkawg6wsy6ee"]
+[gd_scene load_steps=7 format=3 uid="uid://cwkawg6wsy6ee"]
 
 [ext_resource type="Script" uid="uid://dqw0xu3jbwu0q" path="res://bullet.gd" id="1_v7oki"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtl8c"]
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
 albedo_color = Color(3.2944162, 3.2944162, 3.2944162, 1)
 billboard_mode = 1
+distance_fade_mode = 1
+distance_fade_max_distance = 3.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
 material = SubResource("StandardMaterial3D_rtl8c")
-radius = 0.01
-height = 0.02
+radius = 0.02
+height = 0.04
+radial_segments = 4
+rings = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7oki"]
-radius = 0.002
+radius = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7oki"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(2.454227, 2.454227, 1.3991466, 0.21000001)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v7oki"]
+material = SubResource("StandardMaterial3D_v7oki")
+top_radius = 0.001
+bottom_radius = 0.01
+height = 0.5
+rings = 2
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_v7oki")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00014417246)
 mesh = SubResource("SphereMesh_v7oki")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -30,6 +50,14 @@ shape = SubResource("SphereShape3D_v7oki")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="BulletBody" type="Node3D" parent="."]
+
+[node name="Tracer" type="MeshInstance3D" parent="BulletBody"]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0, 0, 0.25128153)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_v7oki")
+skeleton = NodePath("../..")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
