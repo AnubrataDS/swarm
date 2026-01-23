@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxisj3pm4rwcg"]
+[gd_scene load_steps=10 format=3 uid="uid://cxisj3pm4rwcg"]
 
-[ext_resource type="Script" uid="uid://dhcj8cdeafcj3" path="res://gameController.gd" id="1_rpg24"]
+[ext_resource type="Script" uid="uid://dhcj8cdeafcj3" path="res://spawner.gd" id="1_rpg24"]
 [ext_resource type="Script" uid="uid://crfpp1tja4v8k" path="res://cameraController.gd" id="2_8rhti"]
 [ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="2_ohhpf"]
 [ext_resource type="PackedScene" uid="uid://bqalcd7lwn7sj" path="res://player.tscn" id="3_8rhti"]
-[ext_resource type="PackedScene" uid="uid://bitlf7y54vgq1" path="res://sniper.tscn" id="5_21bcp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rhti"]
 albedo_texture = ExtResource("2_ohhpf")
@@ -32,7 +31,7 @@ glow_normalized = true
 glow_hdr_threshold = 0.88
 glow_hdr_scale = 2.47
 
-[node name="Node3D2" type="Node3D"]
+[node name="Node3D" type="Node3D"]
 script = ExtResource("1_rpg24")
 
 [node name="Plane" type="MeshInstance3D" parent="."]
@@ -45,17 +44,17 @@ environment = SubResource("Environment_3vi8l")
 [node name="OrthoCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6.0843296, 10.286768)
 projection = 1
-current = true
 fov = 104.1
 size = 5.0
-near = 0.002
 far = 999999.0
 script = ExtResource("2_8rhti")
 
 [node name="Player" parent="." instance=ExtResource("3_8rhti")]
 
-[node name="Camera3D2" type="Camera3D" parent="."]
+[node name="PerspectiveCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8466672, 0.53212285, 0, -0.53212285, 0.8466672, 0, 0.5896543, 1.5837538)
+current = true
+script = ExtResource("2_8rhti")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024289846, 1.5337641, -2.2604003)
@@ -67,6 +66,3 @@ shadow_blur = 0.56
 distance_fade_enabled = true
 omni_range = 166.403
 omni_attenuation = 1.881
-
-[node name="Sniper" parent="." instance=ExtResource("5_21bcp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2394629, 0, -3.5372496)

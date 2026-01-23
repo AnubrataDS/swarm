@@ -1,6 +1,5 @@
 extends Node3D
 
-@export var player_ref: Node3D
 @onready var area = $Area3D
 @onready var cone = $Body
 @onready var coneShape = $Body/Cone
@@ -18,8 +17,8 @@ var hp = 100
 var hover_radius = randf_range(0.2,1.0)
 var theta = randf_range(0,2*PI)
 var dying = false;
+
 func _ready():
-	player_ref = get_parent().player_ref
 	_update_target_offset()
 
 func _physics_process(delta: float) -> void:
@@ -32,13 +31,13 @@ func _physics_process(delta: float) -> void:
 	
 
 func _look() -> void:
-	cone.look_at(player_ref.get_position())
+	cone.look_at(GlobalVars.player_node.get_position())
 
 func _move(delta:float) -> void:
 	var target_offset = Vector3(hover_radius*sin(theta),0,hover_radius*cos(theta))
-	if(get_position().distance_to(player_ref.get_position()+target_offset) < 0.1):
+	if(get_position().distance_to(GlobalVars.player_node.get_position()+target_offset) < 0.1):
 		_update_target_offset()
-	velocity = ((player_ref.get_position()+target_offset) - get_position()).normalized()*seek_strength
+	velocity = ((GlobalVars.player_node.get_position()+target_offset) - get_position()).normalized()*seek_strength
 	var bodies = area.get_overlapping_areas()
 	var netPush = Vector3(0,0,0)
 	for i in range(min(bodies.size(), proc_lim)):
