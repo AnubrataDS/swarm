@@ -64,12 +64,13 @@ func _blip()->void:
 func _checkDeath()->void:
 	if(hp<=0):
 		dying = true
-		cone.hide()
 		deathparticles.emitting = true
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(0.1).timeout
+		cone.hide()
+		await get_tree().create_timer(1).timeout
 		queue_free()
 	
 func _on_hitbox_area_entered(area: Area3D) -> void:
-	hp-=5
+	hp-=10
 	hitparticle.emitting = true
 	pass # Replace with function body.

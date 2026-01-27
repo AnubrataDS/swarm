@@ -43,6 +43,7 @@ size = Vector2(0.1, 0.1)
 
 [node name="Sniper" type="Node3D"]
 script = ExtResource("1_6jcko")
+lookingAt = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_4ti2x")

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c131d7f2ns7et"]
+
+[resource]
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+albedo_color = Color(3.2944162, 3.2944162, 3.2944162, 1)
+distance_fade_mode = 1
+distance_fade_max_distance = 3.0

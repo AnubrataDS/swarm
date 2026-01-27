@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxisj3pm4rwcg"]
+[gd_scene load_steps=12 format=3 uid="uid://cxisj3pm4rwcg"]
 
 [ext_resource type="Script" uid="uid://dhcj8cdeafcj3" path="res://gameController.gd" id="1_rpg24"]
 [ext_resource type="Script" uid="uid://crfpp1tja4v8k" path="res://cameraController.gd" id="2_8rhti"]
 [ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="2_ohhpf"]
 [ext_resource type="PackedScene" uid="uid://bqalcd7lwn7sj" path="res://player.tscn" id="3_8rhti"]
 [ext_resource type="PackedScene" uid="uid://bitlf7y54vgq1" path="res://sniper.tscn" id="5_21bcp"]
+[ext_resource type="PackedScene" uid="uid://cvsg57g84wsbc" path="res://obstacle_box.tscn" id="6_tpea4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rhti"]
 albedo_texture = ExtResource("2_ohhpf")
@@ -43,7 +44,7 @@ mesh = SubResource("PlaneMesh_g5ejs")
 environment = SubResource("Environment_3vi8l")
 
 [node name="OrthoCam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6.0843296, 10.286768)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 10, 5)
 projection = 1
 current = true
 fov = 104.1
@@ -59,14 +60,37 @@ transform = Transform3D(1, 0, 0, 0, 0.8466672, 0.53212285, 0, -0.53212285, 0.846
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024289846, 1.5337641, -2.2604003)
-light_energy = 3.415
 light_size = 0.094
 shadow_enabled = true
 shadow_bias = 0.037
 shadow_blur = 0.56
 distance_fade_enabled = true
-omni_range = 166.403
-omni_attenuation = 1.881
+omni_range = 89.726
+omni_shadow_mode = 0
 
 [node name="Sniper" parent="." instance=ExtResource("5_21bcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2394629, 0, -3.5372496)
+
+[node name="Sniper2" parent="." instance=ExtResource("5_21bcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0893373, 0, -2.3476205)
+
+[node name="Sniper3" parent="." instance=ExtResource("5_21bcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3502012, 0, -1.0907154)
+
+[node name="Sniper4" parent="." instance=ExtResource("5_21bcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3502012, 0, 3.1882153)
+
+[node name="Sniper5" parent="." instance=ExtResource("5_21bcp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8673433, 0, 2.3626347)
+
+[node name="ObstacleBox" parent="." instance=ExtResource("6_tpea4")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 1.1102281, -0.107715905, 5.5228577)
+
+[node name="ObstacleBox2" parent="." instance=ExtResource("6_tpea4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4127123, -0.107715905, -0.010598779)
+
+[node name="ObstacleBox3" parent="." instance=ExtResource("6_tpea4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7086082, -0.107715905, -0.30387723)
+
+[node name="ObstacleBox4" parent="." instance=ExtResource("6_tpea4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6745424, -0.107715905, 4.480252)

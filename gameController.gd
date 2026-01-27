@@ -1,9 +1,9 @@
 extends Node3D
-const enemy_scene: PackedScene =  preload('res://enemy.tscn')
+const enemy_scene: PackedScene =  preload('res://seeker.tscn')
 @onready var player_node = $Player
 @onready var cam = $OrthoCam
 @onready var sniper = $Sniper
-const count = 5;
+const count = 50;
 func _ready():
 	GlobalVars.player_node = player_node
 	for i in range(count):

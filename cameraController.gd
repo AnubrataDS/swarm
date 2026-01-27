@@ -1,7 +1,7 @@
 extends Camera3D
 
 @export var player_ref: Node3D
-var relativePos = Vector3(0,6,10)
+var relativePos = Vector3(0,5,8)
 @onready var initZoom = size
 var zoomfactor = 20
 func _physics_process(delta: float) -> void:

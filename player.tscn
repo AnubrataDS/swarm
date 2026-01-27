@@ -1,12 +1,26 @@
-[gd_scene load_steps=16 format=3 uid="uid://bqalcd7lwn7sj"]
+[gd_scene load_steps=17 format=3 uid="uid://bqalcd7lwn7sj"]
 
 [ext_resource type="Script" uid="uid://dv22la5wopenx" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://dq7khw0xmrorl" path="res://debug_line.gd" id="2_onrkg"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
+next_pass = SubResource("StandardMaterial3D_i3pqv")
 albedo_color = Color(0.5766774, 0.86397636, 0.85915905, 1)
 albedo_texture = ExtResource("2_i3pqv")
+stencil_mode = 2
+stencil_flags = 2
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 material = SubResource("StandardMaterial3D_4flbx")

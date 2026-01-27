@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://gfpwhjm46mw1"]
+[gd_scene load_steps=23 format=3 uid="uid://gfpwhjm46mw1"]
 
-[ext_resource type="Script" uid="uid://cewpcdpdtgdti" path="res://enemy_behavior.gd" id="1_7k104"]
+[ext_resource type="Script" uid="uid://cewpcdpdtgdti" path="res://seeker.gd" id="1_yaakh"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7k104"]
 viewport_path = NodePath("Body/HPBar/Container")
@@ -27,10 +27,24 @@ top_radius = 0.0
 radial_segments = 8
 cap_top = false
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi2p4"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7k104"]
 resource_local_to_scene = true
+next_pass = SubResource("StandardMaterial3D_qi2p4")
 albedo_color = Color(1, 0.30588236, 0.3019608, 1)
 disable_receive_shadows = true
+stencil_mode = 2
+stencil_flags = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7k104"]
 radius = 1.2
@@ -114,7 +128,7 @@ size = Vector2(0.05, 0.05)
 
 [node name="Enemy" type="Node3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-script = ExtResource("1_7k104")
+script = ExtResource("1_yaakh")
 
 [node name="Body" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvsg57g84wsbc"]
+
+[ext_resource type="Texture2D" uid="uid://21qnw2676msf" path="res://Floor_debug_tex.png" id="1_ki73q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hc3pn"]
+albedo_color = Color(0.215725, 0.43381962, 0.44702595, 1)
+albedo_texture = ExtResource("1_ki73q")
+emission = Color(0.427493, 0.42749307, 0.42749307, 1)
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q01xl"]
+material = SubResource("StandardMaterial3D_hc3pn")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ki73q"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[node name="ObstacleBox" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_q01xl")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_ki73q")
